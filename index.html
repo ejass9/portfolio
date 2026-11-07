@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eric-Junior Assaboussa — Portfolio</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --card: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(255, 255, 255, 0.8);
+  --text: #1d1d1f;
+  --muted: #86868b;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --nav-bg: rgba(245, 245, 247, 0.72);
+  --line: rgba(0, 0, 0, 0.08);
+  --chip: rgba(0, 0, 0, 0.05);
+  --chip-text: #1d1d1f;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --card: rgba(28, 28, 30, 0.75);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text: #f5f5f7;
+    --muted: #86868b;
+    --accent: #2997ff;
+    --accent-hover: #47a4ff;
+    --nav-bg: rgba(0, 0, 0, 0.72);
+    --line: rgba(255, 255, 255, 0.12);
+    --chip: rgba(255, 255, 255, 0.08);
+    --chip-text: #f5f5f7;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Header & Navigation Effet Verre Dépoli */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  transition: all 0.3s ease;
+}
+
+.nav-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* Global Layout */
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero Section Style Apple */
+header.hero {
+  padding: 140px 0 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--chip);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 980px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+}
+
+h1 {
+  font-size: clamp(40px, 8vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  background: linear-gradient(180deg, var(--text) 0%, var(--muted) 150%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead {
+  font-size: clamp(19px, 3vw, 24px);
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 0 32px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 980px;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn.p {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.btn.p:hover {
+  background: var(--accent-hover);
+  transform: scale(1.03);
+}
+
+.btn.secondary {
+  background: var(--chip);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.btn.secondary:hover {
+  background: var(--line);
+  transform: scale(1.03);
+}
+
+/* Sections */
+section {
+  padding: 60px 0;
+  border-top: 1px solid var(--line);
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 36px;
+}
+
+/* Grille de Cartes Modernes */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.card p {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  background: var(--chip);
+  color: var(--chip-text);
+  padding: 4px 12px;
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Section Compétences */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.skill-box {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.skill-box h3 {
+  font-size: 13px;
+  margin: 0 0 14px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* Timeline Parcours */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: var(--line);
+}
+
+.timeline li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 24px;
+  font-size: 16px;
+}
+
+.timeline li:last-child {
+  margin-bottom: 0;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+.timeline-year {
+  font-weight: 600;
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+/* Section Contact Card */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.contact-card p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+/* Footer */
+footer {
+  padding: 40px 0 60px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+/* Animation Scroll Effect (Fade-in) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wrap">
+    <a href="#" class="nav-brand">Eric-Junior Assaboussa</a>
+    <div class="nav-links">
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero reveal active">
+    <span class="tag">Disponible pour un stage · Avril – Juillet 2027</span>
+    <h1>Eric-Junior Assaboussa</h1>
+    <p class="lead">Étudiant en Licence 3 MIAGE à l’Université de Lille. Spécialisé en développement logiciel, architecture applicative et bases de données.</p>
+    <div class="btns">
+      <a class="btn p" href="mailto:assabjunieric@icloud.com">M’écrire</a>
+      <a class="btn secondary" href="https://github.com/ejass9" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn secondary" href="https://www.linkedin.com/in/ejassab/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </header>
+
+  <section id="projets" class="reveal">
+    <h2>Projets sélectionnés</h2>
+    <div class="grid">
+      <article class="card">
+        <div>
+          <div class="meta">Projet POO · Université de Lille</div>
+          <h3>Jeu Tower Defense</h3>
+          <p>Conception et développement d'un jeu de défense de tour orienté objet : modélisation UML, décomposition modulaire et implémentation complète des mécaniques de jeu.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Java</span>
+          <span class="chip">POO</span>
+          <span class="chip">Algorithmique</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div>
+          <div class="meta">Web & UI · Université de Lille</div>
+          <h3>E-commerce Enfants</h3>
+          <p>Création d'une application web e-commerce réactive dédiée aux enfants, construite avec des composants React modulaires.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">JavaScript</span>
+          <span class="chip">React</span>
+          <span class="chip">CSS3</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div>
+          <div class="meta">Fullstack & Data · TECHWEB 2</div>
+          <h3>Site Dynamique & BDD</h3>
+          <p>Architecture et développement d'une application web dynamique interagissant avec une base de données relationnelle (sécurisation et requêtage).</p>
+        </div>
+        <div class="chips">
+          <span class="chip">PHP</span>
+          <span class="chip">SQL</span>
+          <span class="chip">JavaScript</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div>
+          <div class="meta">Data Mining · Université de Lille</div>
+          <h3>Analyse de Données</h3>
+          <p>Exploration d'un dataset de champignons : nettoyage des données, visualisations statistiques et modélisation prédictive de toxicité.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">Data Mining</span>
+          <span class="chip">Orange</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="competences" class="reveal">
+    <h2>Compétences & Stack</h2>
+    <div class="skills-grid">
+      <div class="skill-box">
+        <h3>Langages</h3>
+        <div class="chips">
+          <span class="chip">Java</span>
+          <span class="chip">Python</span>
+          <span class="chip">C</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">PHP</span>
+          <span class="chip">SQL</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>Web & Frameworks</h3>
+        <div class="chips">
+          <span class="chip">React</span>
+          <span class="chip">HTML5 / CSS3</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>Environnement</h3>
+        <div class="chips">
+          <span class="chip">Git</span>
+          <span class="chip">Linux / Shell</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Orange</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>Langues</h3>
+        <div class="chips">
+          <span class="chip">Français (Native)</span>
+          <span class="chip">Anglais (Courant)</span>
+          <span class="chip">Russe (B2)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="parcours" class="reveal">
+    <h2>Parcours académique</h2>
+    <ul class="timeline">
+      <li>
+        <span class="timeline-year">2026 – 2027</span>
+        <strong>Licence 3 MIAGE</strong> — Université de Lille
+      </li>
+      <li>
+        <span class="timeline-year">2023 – 2026</span>
+        <strong>Licence Informatique</strong> — Université de Lille
+      </li>
+      <li>
+        <span class="timeline-year">2021 – 2023</span>
+        <strong>Mathématiques Appliquées & Informatique</strong> — Université d’État de Voronej
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="contact-card">
+      <h2>Collaborons ensemble</h2>
+      <p>Je suis actuellement basé à Lille et ouvert aux opportunités de stage sur toute la France pour la période d'Avril à Juillet 2027.</p>
+      <a class="btn p" href="mailto:assabjunieric@icloud.com">Prendre contact par email</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Eric-Junior Assaboussa · Conçu avec passion</p>
+  </footer>
+
+</div>
+
+<script>
+// Animation fluide à l'apparition (Scroll Reveal)
+function reveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  const windowHeight = window.innerHeight;
+  
+  reveals.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    const elementVisible = 100;
+    
+    if (elementTop < windowHeight - elementVisible) {
+      el.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', reveal);
+reveal(); // Lancement initial
+</script>
+
+</body>
+</html>
