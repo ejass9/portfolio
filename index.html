@@ -6,114 +6,124 @@
 <title>Eric-Junior Assaboussa — Portfolio</title>
 <style>
 :root {
-  --bg: #f5f5f7;
-  --card: rgba(255, 255, 255, 0.75);
-  --card-border: rgba(255, 255, 255, 0.8);
-  --text: #1d1d1f;
-  --muted: #86868b;
-  --accent: #0071e3;
-  --accent-hover: #0077ed;
-  --nav-bg: rgba(245, 245, 247, 0.72);
-  --line: rgba(0, 0, 0, 0.08);
-  --chip: rgba(0, 0, 0, 0.05);
-  --chip-text: #1d1d1f;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #000000;
-    --card: rgba(28, 28, 30, 0.75);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --text: #f5f5f7;
-    --muted: #86868b;
-    --accent: #2997ff;
-    --accent-hover: #47a4ff;
-    --nav-bg: rgba(0, 0, 0, 0.72);
-    --line: rgba(255, 255, 255, 0.12);
-    --chip: rgba(255, 255, 255, 0.08);
-    --chip-text: #f5f5f7;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.5);
-    color-scheme: dark;
-  }
+  --bg: #0b0c10;
+  --bg-card: rgba(22, 24, 33, 0.7);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #f3f4f6;
+  --muted: #9ca3af;
+  --accent: #3b82f6;
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  --accent-glow: rgba(59, 130, 246, 0.25);
+  --nav-bg: rgba(11, 12, 16, 0.75);
+  --line: rgba(255, 255, 255, 0.1);
+  --chip: rgba(255, 255, 255, 0.05);
+  --chip-text: #e5e7eb;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 90px;
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Header & Navigation Effet Verre Dépoli */
+/* Background Animated Gradient Mesh */
+.bg-glow {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glow-blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+  top: -100px;
+  right: -100px;
+  border-radius: 50%;
+  animation: float 12s infinite alternate ease-in-out;
+}
+.glow-blob-2 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, rgba(0,0,0,0) 70%);
+  bottom: 10%;
+  left: -200px;
+  border-radius: 50%;
+  animation: float 16s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 50px) scale(1.1); }
+}
+
+/* Navbar */
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 9999;
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--line);
-  transition: all 0.3s ease;
 }
 
 .nav-wrap {
-  max-width: 980px;
+  max-width: 1050px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-brand {
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 16px;
   color: var(--text);
   text-decoration: none;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .nav-links {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
-  color: var(--text);
-}
+.nav-links a:hover { color: var(--text); }
 
-/* Global Layout */
+/* Main Layout */
 .wrap {
-  max-width: 980px;
+  max-width: 1050px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* Hero Section Style Apple */
+/* Hero Section */
 header.hero {
-  padding: 140px 0 80px;
+  padding: 150px 0 80px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -121,136 +131,235 @@ header.hero {
 }
 
 .tag {
-  display: inline-block;
-  background: var(--chip);
-  color: var(--accent);
-  padding: 6px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  padding: 8px 18px;
   border-radius: 980px;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  margin-bottom: 24px;
+}
+.tag-dot {
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #3b82f6;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 h1 {
-  font-size: clamp(40px, 8vw, 68px);
-  font-weight: 700;
+  font-size: clamp(42px, 7vw, 64px);
+  font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin: 0 0 16px;
-  background: linear-gradient(180deg, var(--text) 0%, var(--muted) 150%);
+  line-height: 1.1;
+  margin: 0 0 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .lead {
-  font-size: clamp(19px, 3vw, 24px);
+  font-size: clamp(18px, 2.5vw, 22px);
   color: var(--muted);
-  max-width: 700px;
-  margin: 0 0 32px;
-  line-height: 1.4;
+  max-width: 720px;
+  margin: 0 0 36px;
+  line-height: 1.5;
   font-weight: 400;
-  letter-spacing: -0.015em;
 }
 
 .btns {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .btn {
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: 980px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
 }
 
 .btn.p {
-  background: var(--accent);
+  background: var(--accent-gradient);
   color: #ffffff;
+  box-shadow: 0 4px 20px var(--accent-glow);
 }
 
 .btn.p:hover {
-  background: var(--accent-hover);
-  transform: scale(1.03);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
 }
 
 .btn.secondary {
   background: var(--chip);
   color: var(--text);
-  border: 1px solid var(--line);
+  border: 1px solid var(--card-border);
 }
 
 .btn.secondary:hover {
-  background: var(--line);
-  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Sections */
 section {
-  padding: 60px 0;
+  padding: 70px 0;
   border-top: 1px solid var(--line);
 }
 
 h2 {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 600;
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
   letter-spacing: -0.02em;
-  margin: 0 0 36px;
+  margin: 0 0 40px;
 }
 
-/* Grille de Cartes Modernes */
-.grid {
+/* Projects Stack (Accordion + Spotlight Animation) */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.project-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 32px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+/* Interactive Cursor Spotlight */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: var(--mouse-y, 0px);
+  left: var(--mouse-x, 0px);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.project-card:hover::before { opacity: 1; }
+.project-card:hover { border-color: rgba(255, 255, 255, 0.2); }
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.project-meta {
+  font-size: 13px;
+  color: #60a5fa;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-card h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.project-desc {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.toggle-btn {
+  background: var(--chip);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.project-card.active .toggle-btn {
+  transform: rotate(45deg);
+}
+
+/* Sub-sections (Accordion Content) */
+.project-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  opacity: 0;
+  border-top: 1px solid transparent;
+}
+
+.project-card.active .project-details {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top-color: var(--line);
+}
+
+.sub-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
+  margin-bottom: 24px;
 }
 
-.card {
-  background: var(--card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: var(--shadow);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.sub-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sub-box h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--text);
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
-}
-
-.card h3 {
-  margin: 0 0 6px;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.meta {
-  font-size: 13px;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 12px;
-}
-
-.card p {
-  margin: 0 0 20px;
+.sub-box ul {
+  margin: 0;
+  padding-left: 18px;
   color: var(--muted);
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .chips {
@@ -262,36 +371,47 @@ h2 {
 .chip {
   background: var(--chip);
   color: var(--chip-text);
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 980px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Section Compétences */
+/* Skills Grid */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
 .skill-box {
-  background: var(--card);
+  background: var(--bg-card);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 24px;
+  transition: transform 0.3s ease;
+}
+
+.skill-box:hover {
+  transform: translateY(-4px);
 }
 
 .skill-box h3 {
-  font-size: 13px;
-  margin: 0 0 14px;
+  font-size: 14px;
+  margin: 0 0 16px;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
-/* Timeline Parcours */
+/* Timeline Sections */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
 .timeline {
   list-style: none;
   padding: 0;
@@ -312,59 +432,73 @@ h2 {
 .timeline li {
   position: relative;
   padding-left: 36px;
-  margin-bottom: 24px;
-  font-size: 16px;
+  margin-bottom: 28px;
 }
 
-.timeline li:last-child {
-  margin-bottom: 0;
-}
+.timeline li:last-child { margin-bottom: 0; }
 
 .timeline li::before {
   content: '';
   position: absolute;
-  left: 3px;
-  top: 7px;
-  width: 14px;
-  height: 14px;
+  left: 4px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px var(--bg);
+  background: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
 }
 
 .timeline-year {
-  font-weight: 600;
-  color: var(--accent);
-  margin-right: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #60a5fa;
+  margin-bottom: 4px;
 }
 
-/* Section Contact Card */
-.contact-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 24px;
-  padding: 40px;
-  text-align: center;
-  box-shadow: var(--shadow);
+.timeline-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
 }
+
+.timeline-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Contact Card */
+.contact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  padding: 50px 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card h2 { margin-bottom: 16px; }
 
 .contact-card p {
   font-size: 18px;
   color: var(--muted);
-  max-width: 600px;
-  margin: 0 auto 24px;
+  max-width: 580px;
+  margin: 0 auto 32px;
+  line-height: 1.5;
 }
 
 /* Footer */
 footer {
-  padding: 40px 0 60px;
+  padding: 40px 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
-  border-top: 1px solid var(--line);
 }
 
-/* Animation Scroll Effect (Fade-in) */
+/* Scroll Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -378,6 +512,11 @@ footer {
 </style>
 </head>
 <body>
+
+<div class="bg-glow">
+  <div class="glow-blob"></div>
+  <div class="glow-blob-2"></div>
+</div>
 
 <nav>
   <div class="nav-wrap">
@@ -393,165 +532,269 @@ footer {
 
 <div class="wrap">
 
+  <!-- Hero Section -->
   <header class="hero reveal active">
-    <span class="tag">Disponible pour un stage · Avril – Juillet 2027</span>
+    <span class="tag"><span class="tag-dot"></span>Disponible pour un stage · Avril – Juillet 2027 (12 semaines)</span>
     <h1>Eric-Junior Assaboussa</h1>
-    <p class="lead">Étudiant en Licence 3 MIAGE à l’Université de Lille. Spécialisé en développement logiciel, architecture applicative et bases de données.</p>
+    <p class="lead">Étudiant en Licence 3 Informatique (Parcours MIAGE) à l'Université de Lille. Passionné par l'architecture logicielle, l'algorithmique et le développement full-stack.</p>
     <div class="btns">
-      <a class="btn p" href="mailto:assabjunieric@icloud.com">M’écrire</a>
+      <a class="btn p" href="mailto:assabjunieric@icloud.com">Prendre contact</a>
       <a class="btn secondary" href="https://github.com/ejass9" target="_blank" rel="noopener">GitHub</a>
       <a class="btn secondary" href="https://www.linkedin.com/in/ejassab/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </header>
 
+  <!-- Section Projets avec Sous-Sections Détaillées -->
   <section id="projets" class="reveal">
-    <h2>Projets sélectionnés</h2>
-    <div class="grid">
-      <article class="card">
-        <div>
-          <div class="meta">Projet POO · Université de Lille</div>
-          <h3>Jeu Tower Defense</h3>
-          <p>Conception et développement d'un jeu de défense de tour orienté objet : modélisation UML, décomposition modulaire et implémentation complète des mécaniques de jeu.</p>
+    <h2>Projets académiques & personnels</h2>
+    <div class="projects-container">
+
+      <!-- Projet 1 -->
+      <article class="project-card">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div>
+            <div class="project-meta">Licence II · Décembre 2025 – Mai 2026</div>
+            <h3>Bloons Tower Defense — Jeu de Stratégie en Java</h3>
+            <p class="project-desc">Conception orientée objet complète et implémentation en équipe d'un jeu de Tower Defense interactif avec architecture modulaire et gestion de partie en temps réel.</p>
+          </div>
+          <div class="toggle-btn">+</div>
         </div>
-        <div class="chips">
-          <span class="chip">Java</span>
-          <span class="chip">POO</span>
-          <span class="chip">Algorithmique</span>
+        
+        <div class="project-details">
+          <div class="sub-grid">
+            <div class="sub-box">
+              <h4>⚡ Fonctionnalités clés</h4>
+              <ul>
+                <li>Plateau de jeu en grille avec trajectoires calculées et vitesse dynamique des ballons.</li>
+                <li>8 types de tours (singe, tourelle, bombe, gel, ralentissement...) avec portées et cadence de tir uniques.</li>
+                <li>Système d'évolutions et d'améliorations payantes pour chaque tour.</li>
+                <li>Gestion de partie complète (vies, économie/argent, vagues d'ennemis, console interactive).</li>
+              </ul>
+            </div>
+            <div class="sub-box">
+              <h4>🛠️ Architecture & Qualité</h4>
+              <ul>
+                <li>Modélisation UML propre, respectant l'héritage et le polymorphisme.</li>
+                <li>Suite de tests unitaires avec JUnit et documentation automatique Javadoc.</li>
+                <li>Automatisation du build via Makefile et génération d'exécutables JAR.</li>
+                <li>Versionnage collaboratif rigoureux sur GitLab (équipe de 4).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="chips">
+            <span class="chip">Java</span>
+            <span class="chip">POO & UML</span>
+            <span class="chip">JUnit</span>
+            <span class="chip">Git / GitLab</span>
+            <span class="chip">Makefile</span>
+          </div>
         </div>
       </article>
 
-      <article class="card">
-        <div>
-          <div class="meta">Web & UI · Université de Lille</div>
-          <h3>E-commerce Enfants</h3>
-          <p>Création d'une application web e-commerce réactive dédiée aux enfants, construite avec des composants React modulaires.</p>
+      <!-- Projet 2 -->
+      <article class="project-card">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div>
+            <div class="project-meta">Licence I · Février 2024 – Juin 2024</div>
+            <h3>Classification de Champignons — Data Mining & ML</h3>
+            <p class="project-desc">Exploration et modélisation de données statistiques pour la prédiction de la comestibilité et la toxicité des champignons à partir de leurs caractéristiques physiques.</p>
+          </div>
+          <div class="toggle-btn">+</div>
         </div>
-        <div class="chips">
-          <span class="chip">JavaScript</span>
-          <span class="chip">React</span>
-          <span class="chip">CSS3</span>
+        
+        <div class="project-details">
+          <div class="sub-grid">
+            <div class="sub-box">
+              <h4>📊 Traitement & Préparation</h4>
+              <ul>
+                <li>Collecte et structuration des jeux de données (couleur, odeur, forme, etc.).</li>
+                <li>Nettoyage approfondi : gestion des valeurs manquantes et traitement des incohérences.</li>
+                <li>Analyse des histogrammes et distributions statistiques des variables.</li>
+              </ul>
+            </div>
+            <div class="sub-box">
+              <h4>🤖 Modélisation & Analyse</h4>
+              <ul>
+                <li>Mise en place de l'algorithme des k plus proches voisins (k-NN).</li>
+                <li>Évaluation de la fiabilité du modèle pour garantir une classification sans risque.</li>
+                <li>Exploration visuelle des composants sous le logiciel Orange Data Mining.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">Data Mining</span>
+            <span class="chip">k-NN Algorithm</span>
+            <span class="chip">Orange</span>
+            <span class="chip">Statistiques</span>
+          </div>
         </div>
       </article>
 
-      <article class="card">
-        <div>
-          <div class="meta">Fullstack & Data · TECHWEB 2</div>
-          <h3>Site Dynamique & BDD</h3>
-          <p>Architecture et développement d'une application web dynamique interagissant avec une base de données relationnelle (sécurisation et requêtage).</p>
+      <!-- Projet 3 -->
+      <article class="project-card">
+        <div class="project-header" onclick="toggleProject(this)">
+          <div>
+            <div class="project-meta">Licence I · 2023 – 2024</div>
+            <h3>Projet Calbuth — Pixellisation d'Images</h3>
+            <p class="project-desc">Développement d'un outil de traitement d'images axé sur l'implémentation d'algorithmes de pixellisation et de manipulation de matrices de pixels.</p>
+          </div>
+          <div class="toggle-btn">+</div>
         </div>
-        <div class="chips">
-          <span class="chip">PHP</span>
-          <span class="chip">SQL</span>
-          <span class="chip">JavaScript</span>
+        
+        <div class="project-details">
+          <div class="sub-grid">
+            <div class="sub-box">
+              <h4>🎯 Défis Techniques</h4>
+              <ul>
+                <li>Manipulation des composants de couleurs et transformation matricielle.</li>
+                <li>Optimisation des traitements algorithmiques pour garantir un rendu rapide.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="chips">
+            <span class="chip">Algorithmique</span>
+            <span class="chip">Programmation Impérative</span>
+            <span class="chip">Traitement d'image</span>
+          </div>
         </div>
       </article>
 
-      <article class="card">
-        <div>
-          <div class="meta">Data Mining · Université de Lille</div>
-          <h3>Analyse de Données</h3>
-          <p>Exploration d'un dataset de champignons : nettoyage des données, visualisations statistiques et modélisation prédictive de toxicité.</p>
-        </div>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">Data Mining</span>
-          <span class="chip">Orange</span>
-        </div>
-      </article>
     </div>
   </section>
 
+  <!-- Section Compétences Stack -->
   <section id="competences" class="reveal">
-    <h2>Compétences & Stack</h2>
+    <h2>Compétences techniques</h2>
     <div class="skills-grid">
       <div class="skill-box">
         <h3>Langages</h3>
         <div class="chips">
-          <span class="chip">Java</span>
           <span class="chip">Python</span>
           <span class="chip">C</span>
+          <span class="chip">Java</span>
+          <span class="chip">C++ (Notions)</span>
           <span class="chip">JavaScript</span>
-          <span class="chip">PHP</span>
           <span class="chip">SQL</span>
         </div>
       </div>
       <div class="skill-box">
-        <h3>Web & Frameworks</h3>
+        <h3>Web & Tech</h3>
         <div class="chips">
-          <span class="chip">React</span>
           <span class="chip">HTML5 / CSS3</span>
+          <span class="chip">ReactJS</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Full-stack</span>
         </div>
       </div>
       <div class="skill-box">
-        <h3>Environnement</h3>
+        <h3>Architecture & Systèmes</h3>
         <div class="chips">
-          <span class="chip">Git</span>
-          <span class="chip">Linux / Shell</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">Orange</span>
+          <span class="chip">Linux / Unix Shell</span>
+          <span class="chip">Git / CI-CD</span>
+          <span class="chip">Gestion Mémoire (C)</span>
+          <span class="chip">Algorithmique</span>
         </div>
       </div>
       <div class="skill-box">
         <h3>Langues</h3>
         <div class="chips">
-          <span class="chip">Français (Native)</span>
-          <span class="chip">Anglais (Courant)</span>
-          <span class="chip">Russe (B2)</span>
+          <span class="chip">Français (Maternelle)</span>
+          <span class="chip">Anglais (Avancé C1-75)</span>
+          <span class="chip">Russe (Intermédiaire)</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Section Parcours & Expériences -->
   <section id="parcours" class="reveal">
-    <h2>Parcours académique</h2>
-    <ul class="timeline">
-      <li>
-        <span class="timeline-year">2026 – 2027</span>
-        <strong>Licence 3 MIAGE</strong> — Université de Lille
-      </li>
-      <li>
-        <span class="timeline-year">2023 – 2026</span>
-        <strong>Licence Informatique</strong> — Université de Lille
-      </li>
-      <li>
-        <span class="timeline-year">2021 – 2023</span>
-        <strong>Mathématiques Appliquées & Informatique</strong> — Université d’État de Voronej
-      </li>
-    </ul>
+    <h2>Parcours académique & Expériences</h2>
+    <div class="timeline-grid">
+      
+      <div>
+        <h3 style="color: var(--muted); font-size: 14px; text-transform: uppercase; margin-bottom: 20px;">Formation</h3>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-year">2023 – 2026</div>
+            <div class="timeline-title">Licence Informatique (Parcours MIAGE)</div>
+            <div class="timeline-desc">Université de Lille — Algorithmes, Gestion dynamique de mémoire (C), Compression (Huffman/Fano), Tech-Web, POO, Automates.</div>
+          </li>
+          <li>
+            <div class="timeline-year">2021 – 2023</div>
+            <div class="timeline-title">Licence I Mathématiques Appliquées & Info</div>
+            <div class="timeline-desc">Université d'État de Voronej (Russie) — Analyse mathématique, probabilités, géométrie spatiale, bases du C++.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="color: var(--muted); font-size: 14px; text-transform: uppercase; margin-bottom: 20px;">Expériences Professionnelles</h3>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-year">Été 2025</div>
+            <div class="timeline-title">Opérateur d'abattage</div>
+            <div class="timeline-desc">Socopa Viandes, Châteauneuf-du-Faou — Travail en équipe sous cadence stricte, rigueur et respect des normes.</div>
+          </li>
+          <li>
+            <div class="timeline-year">Été 2024</div>
+            <div class="timeline-title">Employé polyvalent</div>
+            <div class="timeline-desc">Burger King Euralille, Lille — Gestion du stress, réactivité et service client en environnement dynamique.</div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </section>
 
+  <!-- Section Contact -->
   <section id="contact" class="reveal">
     <div class="contact-card">
-      <h2>Collaborons ensemble</h2>
-      <p>Je suis actuellement basé à Lille et ouvert aux opportunités de stage sur toute la France pour la période d'Avril à Juillet 2027.</p>
-      <a class="btn p" href="mailto:assabjunieric@icloud.com">Prendre contact par email</a>
+      <h2>À la recherche d'un stage</h2>
+      <p>Actuellement à Lille, je recherche une opportunité de <strong>stage de 12 semaines (Avril à Juillet 2027)</strong> pour concrétiser ma fin de licence et apporter mes compétences en développement à vos projets.</p>
+      <a class="btn p" href="mailto:assabjunieric@icloud.com">Me contacter par email</a>
     </div>
   </section>
 
   <footer>
-    <p>© 2026 Eric-Junior Assaboussa · Conçu avec passion</p>
+    <p>© 2026 Eric-Junior Assaboussa · Basé à Lille, France</p>
   </footer>
 
 </div>
 
 <script>
-// Animation fluide à l'apparition (Scroll Reveal)
+// Toggle Accordion pour les projets
+function toggleProject(headerEl) {
+  const card = headerEl.parentElement;
+  card.classList.toggle('active');
+}
+
+// Interactive Spotlight Effect on Mouse Move
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+// Scroll Reveal Animation
 function reveal() {
   const reveals = document.querySelectorAll('.reveal');
   const windowHeight = window.innerHeight;
   
   reveals.forEach(el => {
     const elementTop = el.getBoundingClientRect().top;
-    const elementVisible = 100;
-    
-    if (elementTop < windowHeight - elementVisible) {
+    if (elementTop < windowHeight - 80) {
       el.classList.add('active');
     }
   });
 }
 
 window.addEventListener('scroll', reveal);
-reveal(); // Lancement initial
+reveal();
 </script>
 
 </body>
