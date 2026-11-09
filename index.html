@@ -85,10 +85,33 @@ nav {
 .nav-wrap {
   max-width: 1050px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav-brand-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Photo de profil miniature */
+.nav-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--chip);
+}
+
+.nav-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .nav-brand {
@@ -113,6 +136,71 @@ nav {
 }
 
 .nav-links a:hover { color: var(--text); }
+
+/* Modal Lightbox pour afficher la photo en grand */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 24px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
 
 /* Main Layout */
 .wrap {
@@ -247,7 +335,6 @@ h2 {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
-/* Interactive Cursor Spotlight */
 .project-card::before {
   content: "";
   position: absolute;
@@ -314,7 +401,6 @@ h2 {
   transform: rotate(45deg);
 }
 
-/* Sub-sections (Accordion Content) */
 .project-details {
   max-height: 0;
   overflow: hidden;
@@ -520,7 +606,11 @@ footer {
 
 <nav>
   <div class="nav-wrap">
-    <a href="#" class="nav-brand">Eric-Junior Assaboussa</a>
+    <div class="nav-brand-container">
+      <!-- Photo miniature cliquable -->
+      <img src="profile.jpeg" alt="Eric-Junior Assaboussa" class="nav-avatar" id="navAvatar">
+      <a href="#" class="nav-brand">Eric-Junior Assaboussa</a>
+    </div>
     <div class="nav-links">
       <a href="#projets">Projets</a>
       <a href="#competences">Compétences</a>
@@ -529,6 +619,14 @@ footer {
     </div>
   </div>
 </nav>
+
+<!-- Modal pour l'affichage plein écran de la photo -->
+<div class="modal-overlay" id="imageModal">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <img src="profile.jpeg" alt="Eric-Junior Assaboussa - Photo" class="modal-img" id="modalImg">
+  </div>
+</div>
 
 <div class="wrap">
 
@@ -544,7 +642,7 @@ footer {
     </div>
   </header>
 
-  <!-- Section Projets avec Sous-Sections Détaillées -->
+  <!-- Section Projets -->
   <section id="projets" class="reveal">
     <h2>Projets académiques & personnels</h2>
     <div class="projects-container">
@@ -605,7 +703,7 @@ footer {
         <div class="project-details">
           <div class="sub-grid">
             <div class="sub-box">
-              <h4>📊 Traitement & Préparation</h4>
+              <h4>Traitement & Préparation</h4>
               <ul>
                 <li>Collecte et structuration des jeux de données (couleur, odeur, forme, etc.).</li>
                 <li>Nettoyage approfondi : gestion des valeurs manquantes et traitement des incohérences.</li>
@@ -613,7 +711,7 @@ footer {
               </ul>
             </div>
             <div class="sub-box">
-              <h4>🤖 Modélisation & Analyse</h4>
+              <h4>Modélisation & Analyse</h4>
               <ul>
                 <li>Mise en place de l'algorithme des k plus proches voisins (k-NN).</li>
                 <li>Évaluation de la fiabilité du modèle pour garantir une classification sans risque.</li>
@@ -645,7 +743,7 @@ footer {
         <div class="project-details">
           <div class="sub-grid">
             <div class="sub-box">
-              <h4>🎯 Défis Techniques</h4>
+              <h4>Défis Techniques</h4>
               <ul>
                 <li>Manipulation des composants de couleurs et transformation matricielle.</li>
                 <li>Optimisation des traitements algorithmiques pour garantir un rendu rapide.</li>
@@ -763,13 +861,34 @@ footer {
 </div>
 
 <script>
+// Modal Lightbox pour la photo de profil
+const navAvatar = document.getElementById('navAvatar');
+const imageModal = document.getElementById('imageModal');
+const modalClose = document.getElementById('modalClose');
+
+if (navAvatar && imageModal) {
+  navAvatar.addEventListener('click', () => {
+    imageModal.classList.add('active');
+  });
+
+  modalClose.addEventListener('click', () => {
+    imageModal.classList.remove('active');
+  });
+
+  imageModal.addEventListener('click', (e) => {
+    if (e.target === imageModal) {
+      imageModal.classList.remove('active');
+    }
+  });
+}
+
 // Toggle Accordion pour les projets
 function toggleProject(headerEl) {
   const card = headerEl.parentElement;
   card.classList.toggle('active');
 }
 
-// Interactive Spotlight Effect on Mouse Move
+// Spotlight Effect on Mouse Move
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
